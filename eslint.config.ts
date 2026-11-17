@@ -14,8 +14,8 @@ export default defineConfig([
     ]),
     {
         files: [
-            "src",
-            "test"
+            "./src/**/*.{ts,js}",
+            "./test/**/*.{ts,js}"
         ],
         extends: [
             js.configs.recommended,
