@@ -12,7 +12,7 @@ export class LogBodyInterceptor implements NestInterceptor {
             body = JSON.stringify(request.body);
         }
 
-        console.log(`request body: ${JSON.stringify(request.body)}`);
+        console.log(`request body: ${JSON.stringify(body)}`);
 
         return next.handle()
             .pipe(
