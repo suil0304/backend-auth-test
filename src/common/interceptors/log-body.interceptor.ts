@@ -7,7 +7,7 @@ interface RequestType {
 
 @Injectable()
 export class LogBodyInterceptor implements NestInterceptor {
-    intercept(context:ExecutionContext, next:CallHandler<any>):Observable<any> {
+    intercept(context:ExecutionContext, next:CallHandler):Observable<unknown> {
         const httpContext = context.switchToHttp();
         const request = httpContext.getRequest<RequestType>();
 
@@ -23,9 +23,12 @@ export class LogBodyInterceptor implements NestInterceptor {
 
         return next.handle()
             .pipe(
-                tap((data) => {
+                tap((data:unknown) => {
                     let body = data;
-                    if(typeof body === "object") {
+                    if(
+                        typeof body === "object"
+                        && body !== null
+                    ) {
                         body = JSON.stringify(body);
                     }
 
